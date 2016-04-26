@@ -1,0 +1,5 @@
+{
+  "presets": [
+    "@morlay/babel-presets"
+  ]
+}
