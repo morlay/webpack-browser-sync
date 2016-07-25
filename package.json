@@ -21,21 +21,21 @@
     "test": "npm run build && npm run lint && npm run mocha"
   },
   "dependencies": {
-    "browser-sync": "2.12.x",
+    "browser-sync": "2.13.x",
     "compression": "1.6.x",
     "connect-history-api-fallback": "1.2.x",
-    "lodash": "4.11.x",
+    "lodash": "4.14.x",
     "webpack": "1.x",
     "webpack-dev-middleware": "1.6.x",
-    "webpack-hot-middleware": "2.10.x",
-    "yargs": "4.6.x"
+    "webpack-hot-middleware": "2.12.x",
+    "yargs": "4.8.x"
   },
   "devDependencies": {
-    "@morlay/babel-presets": "0.1.x",
-    "@morlay/eslint-config": "0.1.x",
-    "@morlay/test-utils": "0.1.x",
-    "babel-loader": "6.2.4",
-    "html-webpack-plugin": "2.16.x"
+    "@morlay/babel-presets": "0.3.x",
+    "@morlay/eslint-config": "0.3.x",
+    "@morlay/test-utils": "0.3.x",
+    "babel-loader": "6.2.x",
+    "html-webpack-plugin": "2.22.x"
   },
   "main": "index.js",
   "directories": {

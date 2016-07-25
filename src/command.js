@@ -1,6 +1,7 @@
 import browserSync from 'browser-sync';
-import getBrowserSyncConfig from './getBrowserSyncConfig';
 import yargs from 'yargs';
+
+import getBrowserSyncConfig from './getBrowserSyncConfig';
 
 const argv = yargs
 
@@ -37,7 +38,8 @@ const argv = yargs
       type: 'boolean',
     },
   })
-  .help('help').alias('help', 'h')
+  .help('help')
+  .alias('help', 'h')
   .showHelpOnFail(false, 'whoops, something went wrong! run with --help')
   .argv;
 
