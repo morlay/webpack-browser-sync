@@ -18,20 +18,24 @@
   },
   "scripts": {
     "build": "babel src/ --ignore __*__ --out-dir lib/",
-    "start": "npm run build && node ./bin/webpack-browser-sync --config ./examples/webpack.config.js --hot",
+    "webpack": "babel-node ./src/command.js --config ./examples/webpack.config.js --hot",
+    "webpack2": "npm install webpack@2.1.0-beta.20 && babel-node ./src/command.js --config ./examples/webpack.config.js --hot",
     "lint": "eslint ./ --fix",
     "mocha": "mocha $npm_package_config_MOCHA_OPTS",
-    "test": "npm run build && npm run lint && npm run mocha"
+    "test": "npm run lint && npm run mocha",
+    "prepublish": "npm run build"
   },
   "dependencies": {
-    "browser-sync": "2.13.x",
+    "browser-sync": "2.14.x",
     "compression": "1.6.x",
     "connect-history-api-fallback": "1.2.x",
     "lodash": "4.14.x",
-    "webpack": "1.x",
     "webpack-dev-middleware": "1.6.x",
     "webpack-hot-middleware": "2.12.x",
     "yargs": "4.8.x"
+  },
+  "peerDependencies": {
+    "webpack": "*"
   },
   "devDependencies": {
     "@morlay/babel-preset": "1.0.x",
@@ -40,10 +44,6 @@
     "babel-loader": "6.2.x",
     "babel-plugin-transform-es2015-modules-commonjs": "6.11.x",
     "html-webpack-plugin": "2.22.x"
-  },
-  "main": "index.js",
-  "directories": {
-    "example": "examples"
   },
   "repository": {
     "type": "git",

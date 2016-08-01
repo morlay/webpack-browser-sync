@@ -17,12 +17,12 @@ const argv = yargs
       required: true,
     },
     webpack: {
-      description: 'template path for generating file from graphs',
+      description: 'enable webpack',
       type: 'boolean',
       default: true,
     },
     hot: {
-      description: 'enable hot module replacement',
+      description: 'enable hot module replacement [need enabled webpack]',
       type: 'boolean',
     },
     proxy: {

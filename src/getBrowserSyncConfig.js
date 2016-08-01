@@ -13,7 +13,11 @@ const getBrowserSyncConfig = (argv) => {
   const webpackConfigFile = path.join(process.cwd(), argv.config);
   /* eslint global-require: 0 */
   const webpackConfig = require(webpackConfigFile);
-  const patchedWebpackConfig = argv.hot ? patchWebConfigWithHMR(webpackConfig) : webpackConfig;
+  const webpackVersion = require('webpack/package.json').version;
+
+  const patchedWebpackConfig = argv.hot
+    ? patchWebConfigWithHMR(webpackConfig, webpackVersion)
+    : webpackConfig;
 
   const middleware = [];
 

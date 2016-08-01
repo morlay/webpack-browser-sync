@@ -1,6 +1,6 @@
 ## Webpack Browser-sync
 
-A webpack dev server with browser-sync
+A webpack@1&2 dev server with browser-sync
 
 [![Build Status](https://img.shields.io/travis/morlay/webpack-browser-sync.svg?style=flat-square)](https://travis-ci.org/morlay/webpack-browser-sync)
 [![NPM](https://img.shields.io/npm/v/webpack-browser-sync.svg?style=flat-square)](https://npmjs.org/package/webpack-browser-sync)
@@ -14,9 +14,10 @@ Usage: webpack-browser-sync [options]
 Options:
   --config, -c          path to webpack.config
                                      [required] [default: "./webpack.config.js"]
-  --webpack             template path for generating file from graphs
+  --webpack             enable webpack
                                                        [boolean] [default: true]
-  --hot                 enable hot module replacement                  [boolean]
+  --hot                 enable hot module replacement [need webpack enabled]                  
+                                                                       [boolean]
   --proxy               use proxy for remote debug                      [string]
   --compress            enable gzip                                    [boolean]
   --historyApiFallback  enable history api fallback                    [boolean]
