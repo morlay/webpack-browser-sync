@@ -1,6 +1,6 @@
 {
   "name": "webpack-browser-sync",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A webpack dev server with browser-sync",
   "bin": {
     "webpack-browser-sync": "bin/webpack-browser-sync.js"
@@ -43,7 +43,8 @@
     "@morlay/tests": "1.x.x",
     "babel-loader": "6.2.x",
     "babel-plugin-transform-es2015-modules-commonjs": "6.11.x",
-    "html-webpack-plugin": "2.22.x"
+    "html-webpack-plugin": "2.22.x",
+    "webpack": "*"
   },
   "repository": {
     "type": "git",

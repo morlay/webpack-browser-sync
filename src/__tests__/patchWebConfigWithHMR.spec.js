@@ -1,10 +1,7 @@
 import { expect } from '@morlay/tests';
-import _ from 'lodash';
 import {
   patchEntry,
-  patchPlugins,
   HMR_ENTRY,
-  getHmrPluginsByVersion,
 } from '../patchWebConfigWithHMR';
 
 describe(__filename, () => {
