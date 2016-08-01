@@ -10,13 +10,16 @@
     "src/",
     "lib/"
   ],
+  "engines": {
+    "node": ">= 6"
+  },
   "config": {
     "MOCHA_OPTS": "-R dot --compilers js:babel-core/register src/__tests__/*.spec.js"
   },
   "scripts": {
     "build": "babel src/ --ignore __*__ --out-dir lib/",
     "start": "npm run build && node ./bin/webpack-browser-sync --config ./examples/webpack.config.js --hot",
-    "lint": "eslint ./",
+    "lint": "eslint ./ --fix",
     "mocha": "mocha $npm_package_config_MOCHA_OPTS",
     "test": "npm run build && npm run lint && npm run mocha"
   },
@@ -31,10 +34,11 @@
     "yargs": "4.8.x"
   },
   "devDependencies": {
-    "@morlay/babel-presets": "0.3.x",
-    "@morlay/eslint-config": "0.3.x",
-    "@morlay/test-utils": "0.3.x",
+    "@morlay/babel-preset": "1.0.x",
+    "@morlay/eslint-config": "1.0.x",
+    "@morlay/tests": "1.x.x",
     "babel-loader": "6.2.x",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.11.x",
     "html-webpack-plugin": "2.22.x"
   },
   "main": "index.js",
@@ -48,7 +52,5 @@
   "bugs": {
     "url": "https://github.com/morlay/webpack-browser-sync/issues"
   },
-  "homepage": "https://github.com/morlay/webpack-browser-sync#readme",
-  "author": "",
-  "license": "ISC"
+  "homepage": "https://github.com/morlay/webpack-browser-sync#readme"
 }

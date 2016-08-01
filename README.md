@@ -24,4 +24,5 @@ Options:
 
 Notice
 
-`output.publicPath` should not use remote url for development
+* only support node >= 6
+* `output.publicPath` should not use remote url for development

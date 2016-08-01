@@ -1,4 +1,4 @@
-import { expect } from '@morlay/test-utils';
+import { expect } from '@morlay/tests';
 import _ from 'lodash';
 import {
   patchEntry,
