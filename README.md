@@ -16,6 +16,8 @@ Options:
                                      [required] [default: "./webpack.config.js"]
   --webpack             enable webpack
                                                        [boolean] [default: true]
+  --index               index.html relative path from webpackConfig.output.path
+                                                  [string] [default: index.html]
   --hot                 enable hot module replacement [need webpack enabled]                  
                                                                        [boolean]
   --proxy               use proxy for remote debug                      [string]

@@ -18,8 +18,8 @@
   },
   "scripts": {
     "build": "babel src/ --ignore __*__ --out-dir lib/",
-    "webpack": "babel-node ./src/command.js --config ./examples/webpack.config.js --hot",
-    "webpack2": "npm install webpack@2.1.0-beta.20 && babel-node ./src/command.js --config ./examples/webpack.config.js --hot",
+    "webpack": "babel-node ./src/command.js --config ./examples/webpack.config.js --hot --index=../index.html",
+    "webpack2": "npm install webpack@2.1.0-beta.20 && npm run webpack",
     "lint": "eslint ./ --fix",
     "mocha": "mocha $npm_package_config_MOCHA_OPTS",
     "test": "npm run lint && npm run mocha",
@@ -28,11 +28,11 @@
   "dependencies": {
     "browser-sync": "2.14.x",
     "compression": "1.6.x",
-    "connect-history-api-fallback": "1.2.x",
-    "lodash": "4.14.x",
+    "connect-history-api-fallback": "1.3.x",
+    "lodash": "4.15.x",
     "webpack-dev-middleware": "1.6.x",
     "webpack-hot-middleware": "2.12.x",
-    "yargs": "4.8.x"
+    "yargs": "5.0.x"
   },
   "peerDependencies": {
     "webpack": "*"

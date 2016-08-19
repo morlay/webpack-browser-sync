@@ -55,7 +55,7 @@ const getBrowserSyncConfig = (argv) => {
 
     middleware.push((req, res, next) => {
       if (req.method === 'GET' && req.url === '/') {
-        const indexFile = path.join(patchedWebpackConfig.output.path, 'index.html');
+        const indexFile = path.join(patchedWebpackConfig.output.path, argv.index);
         devMiddleware.fileSystem.readFile(indexFile, (err, result) => {
           if (!err) {
             res.write(result);
@@ -87,7 +87,7 @@ const getBrowserSyncConfig = (argv) => {
     server: {
       notify: false,
       baseDir: getBaseDir(patchedWebpackConfig.output),
-      index: path.join(patchedWebpackConfig.output.publicPath || '/', 'index.html'),
+      index: path.join(patchedWebpackConfig.output.publicPath || '/', argv.index),
       middleware,
     },
   };

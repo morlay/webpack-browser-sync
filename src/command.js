@@ -21,6 +21,11 @@ const argv = yargs
       type: 'boolean',
       default: true,
     },
+    index: {
+      description: 'index.html relative path from webpackConfig.output.path',
+      type: 'string',
+      default: 'index.html',
+    },
     hot: {
       description: 'enable hot module replacement [need enabled webpack]',
       type: 'boolean',
