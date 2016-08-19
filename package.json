@@ -1,6 +1,6 @@
 {
   "name": "webpack-browser-sync",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "A webpack dev server with browser-sync",
   "bin": {
     "webpack-browser-sync": "bin/webpack-browser-sync.js"
