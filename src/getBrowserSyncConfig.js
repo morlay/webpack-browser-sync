@@ -58,10 +58,11 @@ const getBrowserSyncConfig = (argv) => {
       if (req.method === 'GET' && req.url === '/') {
         const indexFile = path.join(patchedWebpackConfig.output.path, argv.index);
         devMiddleware.fileSystem.readFile(indexFile, (err, result) => {
-          if (!err) {
-            res.write(result);
-            res.end();
+          if (err) {
+            throw err;
           }
+          res.write(result);
+          res.end();
         });
       } else {
         next();
