@@ -12,6 +12,7 @@ import patchWebConfigWithHMR from './patchWebConfigWithHMR';
 const getBrowserSyncConfig = (argv) => {
   const webpackConfigFile = path.join(process.cwd(), argv.config);
   /* eslint global-require: 0 */
+  /* eslint import/no-dynamic-require: 0 */
   const webpackConfig = require(webpackConfigFile);
   const webpackVersion = require('webpack/package.json').version;
 
@@ -32,7 +33,7 @@ const getBrowserSyncConfig = (argv) => {
 
     if (argv.hot) {
       middleware.push(
-        webpackHotMiddleware(bundler)
+        webpackHotMiddleware(bundler),
       );
     }
 
