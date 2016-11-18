@@ -26,9 +26,12 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "browser-sync": "2.17.x",
+    "babel-cli": "6.18.x",
+    "babel-core": "6.18.x",
+    "browser-sync": "2.18.x",
     "compression": "1.6.x",
     "connect-history-api-fallback": "1.3.x",
+    "eslint": "3.10.x",
     "lodash": "4.17.x",
     "webpack-dev-middleware": "1.8.x",
     "webpack-hot-middleware": "2.13.x",
@@ -38,8 +41,8 @@
     "webpack": "*"
   },
   "devDependencies": {
-    "@morlay/babel-preset": "2.1.x",
-    "@morlay/eslint-config": "2.1.x",
+    "@morlay/babel-preset": "3.0.x",
+    "@morlay/eslint-config": "3.0.x",
     "@morlay/tests": "1.x.x",
     "babel-loader": "6.2.x",
     "babel-plugin-transform-es2015-modules-commonjs": "6.18.x",

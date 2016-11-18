@@ -25,4 +25,9 @@ module.exports = {
       filename: '../index.html',
     }),
   ],
+  devServer: {
+    browserSync: {
+      https: true,
+    },
+  },
 };

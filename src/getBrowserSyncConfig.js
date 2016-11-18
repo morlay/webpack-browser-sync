@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import path from 'path';
+import _ from 'lodash';
 
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -78,6 +79,7 @@ const getBrowserSyncConfig = (argv) => {
 
   if (argv.proxy) {
     return {
+      ...(_.get(patchedWebpackConfig, 'devServer.browserSync')),
       proxy: {
         target: argv.proxy,
         middleware,
@@ -86,6 +88,7 @@ const getBrowserSyncConfig = (argv) => {
   }
 
   return {
+    ...(_.get(patchedWebpackConfig, 'devServer.browserSync')),
     server: {
       notify: false,
       baseDir: getBaseDir(patchedWebpackConfig.output),
