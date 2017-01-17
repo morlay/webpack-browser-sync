@@ -1,5 +1,0 @@
-extends: "@morlay/eslint-config"
-env:
-  mocha: true
-rules:
-  import/no-extraneous-dependencies: 0

@@ -1,1 +1,1 @@
-global.document.write('<div>123</div>');
+document.write("<div>123</div>");
