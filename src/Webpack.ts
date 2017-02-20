@@ -18,11 +18,7 @@ export const getHmrPluginsByVersion = (): IPlugin[] => {
 
   switch (majarVersion) {
     case "1":
-      return [
-        webpack.optimize.OccurenceOrderPlugin,
-        webpack.HotModuleReplacementPlugin,
-        webpack.NoErrorsPlugin,
-      ] as IPlugin[];
+      throw new Error("not support webpack@1")
     case "2":
     default:
       return [
