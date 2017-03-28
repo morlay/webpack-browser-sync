@@ -4,6 +4,8 @@
   ],
   "rules": {
     "no-var-requires": false,
+    "semicolon": false,
+    "no-misused-new": false,
     "no-empty": false,
     "no-console": false,
     "no-reference": false,

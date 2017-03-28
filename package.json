@@ -36,7 +36,7 @@
     "memory-fs": "0.4.x",
     "webpack-dev-middleware": "1.10.x",
     "webpack-hot-middleware": "2.17.x",
-    "yargs": "6.6.x"
+    "yargs": "7.0.x"
   },
   "peerDependencies": {
     "webpack": "2"
@@ -45,9 +45,9 @@
     "ava": "0.18.x",
     "html-webpack-plugin": "2.28.x",
     "ts-loader": "2.0.x",
-    "ts-node": "2.1.x",
-    "tslint": "4.4.x",
-    "typescript": "2.1.x",
+    "ts-node": "3.0.x",
+    "tslint": "4.5.x",
+    "typescript": "2.2.x",
     "webpack": "*"
   },
   "repository": "git@github.com:morlay/webpack-browser-sync.git",
