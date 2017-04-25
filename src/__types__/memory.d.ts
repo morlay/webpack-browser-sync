@@ -43,7 +43,7 @@ declare module "memory-fs" {
     readFile(path: string, optArg: {}, callback: (err?: Error, result?: any) => any): void;
   }
 
-  const mfs: MemoryFileSystem;
+  const mfs: MemoryFileSystem
   export = mfs;
 }
 

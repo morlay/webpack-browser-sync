@@ -1,6 +1,6 @@
 {
   "name": "webpack-browser-sync",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "main": "lib/index.js",
   "description": "A webpack dev server with browser-sync",
   "bin": {
@@ -15,8 +15,8 @@
     "node": ">= 6"
   },
   "scripts": {
-    "build": "tsc",
-    "webpack": "ts-node ./src/command.ts --config ./examples/webpack.config.js --hot --index=../index.html",
+    "build": "tsc -p .",
+    "webpack": "ts-node ./src/command.ts --config ./src/__examples__/webpack.config.ts --hot --index=../index.html",
     "lint": "tslint ./ --fix",
     "test": "npm run lint && npm run build && ava -v",
     "prepublish": "npm run build"
@@ -32,21 +32,23 @@
     "browser-sync": "2.18.x",
     "compression": "1.6.x",
     "connect-history-api-fallback": "1.3.x",
+    "interpret": "1.0.x",
     "lodash": "4.17.x",
     "memory-fs": "0.4.x",
     "webpack-dev-middleware": "1.10.x",
-    "webpack-hot-middleware": "2.17.x",
-    "yargs": "7.0.x"
+    "webpack-hot-middleware": "2.18.x",
+    "yargs": "7.1.x"
   },
   "peerDependencies": {
     "webpack": "2"
   },
   "devDependencies": {
-    "ava": "0.18.x",
+    "@types/html-webpack-plugin": "2.28.0",
+    "ava": "0.19.x",
     "html-webpack-plugin": "2.28.x",
     "ts-loader": "2.0.x",
     "ts-node": "3.0.x",
-    "tslint": "4.5.x",
+    "tslint": "5.1.x",
     "typescript": "2.2.x",
     "webpack": "*"
   },
