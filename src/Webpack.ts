@@ -85,14 +85,14 @@ export const createMiddlewaresForWebpack = (
   const devServerMiddlewares = [
     devMiddleware,
     ((req, res, next) => {
-      devMiddleware.waitUntilValid(() => {
-        if (req.method === "GET" && req.url === "/") {
+      if (req.method === "GET" && req.url === "/") {
+        devMiddleware.waitUntilValid(() => {
           const indexFile = path.join(webpackConfig.output.path, index)
-          res.write(fs.readFileSync(indexFile))
-          return res.end()
-        }
-        return next()
-      })
+          res.end(fs.readFileSync(indexFile))
+        })
+      } else {
+        next()
+      }
     }) as browserSync.MiddlewareHandler,
   ]
 

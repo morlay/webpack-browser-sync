@@ -1,14 +1,13 @@
 import * as browserSync from "browser-sync"
-
 import * as compress from "compression"
 import * as connectHistoryApiFallback from "connect-history-api-fallback"
+import * as interpret from "interpret"
 import * as _ from "lodash"
 import * as path from "path"
 
 import { getBaseDir } from "./utils"
 
 import { createMiddlewaresForWebpack } from "./Webpack"
-import interpret = require("interpret")
 
 export interface IOptions {
   config: string;
