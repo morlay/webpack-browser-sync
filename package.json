@@ -1,6 +1,6 @@
 {
   "name": "webpack-browser-sync",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "main": "lib/index.js",
   "description": "A webpack dev server with browser-sync",
   "bin": {
@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "tsc -p .",
-    "webpack": "ts-node ./src/command.ts --config ./src/__examples__/webpack.config.ts --index=../index.html",
+    "webpack": "ts-node ./src/command.ts --config ./src/__examples__/webpack.config.ts --hot --index=../index.html",
     "lint": "tslint ./ --fix",
     "test": "npm run lint && npm run build && ava -v",
     "prepublish": "npm run build"
@@ -25,8 +25,8 @@
     "@types/browser-sync": "0.0.x",
     "@types/compression": "0.0.x",
     "@types/lodash": "4.14.x",
-    "@types/node": "7.0.x",
-    "@types/webpack": "2.2.x",
+    "@types/node": "8.0.x",
+    "@types/webpack": "2.2.16",
     "@types/webpack-dev-middleware": "1.9.x",
     "@types/yargs": "6.6.x",
     "browser-sync": "2.18.x",
@@ -40,7 +40,7 @@
     "yargs": "8.0.x"
   },
   "peerDependencies": {
-    "webpack": "2"
+    "webpack": "2 || 3"
   },
   "devDependencies": {
     "@types/faker": "4.1.0",
@@ -48,11 +48,11 @@
     "ava": "0.19.x",
     "faker": "4.1.x",
     "html-webpack-plugin": "2.28.x",
-    "ts-loader": "2.1.x",
-    "ts-node": "3.0.x",
+    "ts-loader": "2.2.x",
+    "ts-node": "3.1.x",
     "tslint": "5.4.x",
     "typescript": "2.3.x",
-    "webpack": "*"
+    "webpack": "3.0.0"
   },
   "repository": "git@github.com:morlay/webpack-browser-sync.git",
   "author": "Morlay <morlay@qq.com>",

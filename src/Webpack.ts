@@ -98,8 +98,8 @@ export const createMiddlewaresForWebpack = (
 
   if (hot) {
     return [
-      webpackHotMiddleware(bundler),
       ...devServerMiddlewares,
+      webpackHotMiddleware(bundler),
     ]
   }
 
