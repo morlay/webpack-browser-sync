@@ -66,7 +66,7 @@ const createBrowserSyncOptions = (options: IOptions): browserSync.Options => {
   }
 
   if (options.compress) {
-    middlewares = middlewares.concat(compress({ level: 6 }))
+    middlewares = middlewares.concat(compress({ level: 6 }) as browserSync.MiddlewareHandler)
   }
 
   if (options.proxy) {

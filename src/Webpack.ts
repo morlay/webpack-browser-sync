@@ -68,11 +68,11 @@ export const createMiddlewaresForWebpack = (
   bundler.outputFileSystem = fs
 
   const devMiddleware = webpackDevMiddleware(bundler, {
-    publicPath: patchedWebpackConfig.output.publicPath,
+    publicPath: (patchedWebpackConfig.output || {}).publicPath!,
 
     stats: patchedWebpackConfig.stats || {
       colors: true,
-      reasons: true,
+      reasons: false,
       hash: false,
       version: false,
       timings: true,
@@ -87,7 +87,7 @@ export const createMiddlewaresForWebpack = (
     ((req, res, next) => {
       if (req.method === "GET" && req.url === "/") {
         devMiddleware.waitUntilValid(() => {
-          const indexFile = path.join(webpackConfig.output.path, index)
+          const indexFile = path.join(webpackConfig.output!.path!, index)
           res.end(fs.readFileSync(indexFile))
         })
       } else {

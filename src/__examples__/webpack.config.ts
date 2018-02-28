@@ -1,6 +1,6 @@
-import * as HtmlWebpackPlugin from "html-webpack-plugin"
-import * as path from "path"
-import { Configuration } from "webpack"
+import * as HtmlWebpackPlugin from "html-webpack-plugin";
+import * as path from "path";
+import { Configuration } from "webpack";
 
 const conf: Configuration = {
   context: __dirname,
@@ -22,7 +22,7 @@ const conf: Configuration = {
             options: {
               transpileOnly: true,
               compilerOptions: {
-                "declaration": false,
+                declaration: false,
               },
             },
           },
@@ -40,6 +40,6 @@ const conf: Configuration = {
   //     https: true,
   //   },
   // },
-}
+};
 
-export = conf
+export = conf;

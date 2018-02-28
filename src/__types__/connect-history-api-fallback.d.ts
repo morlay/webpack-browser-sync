@@ -1,5 +1,5 @@
 declare module "connect-history-api-fallback" {
-  import * as browserSync from "browser-sync"
+  import * as browserSync from "browser-sync";
 
   interface IOptions {
     index: string;
@@ -8,7 +8,8 @@ declare module "connect-history-api-fallback" {
   function connectHistoryApiFallback(opts?: IOptions): browserSync.MiddlewareHandler;
 
   namespace connectHistoryApiFallback {
+
   }
 
-  export = connectHistoryApiFallback
+  export = connectHistoryApiFallback;
 }

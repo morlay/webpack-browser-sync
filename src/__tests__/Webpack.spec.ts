@@ -1,9 +1,6 @@
 import { test } from "ava";
 
-import {
-  patchEntryWithHMR,
-  HMR_ENTRY,
-} from "../Webpack";
+import { patchEntryWithHMR, HMR_ENTRY } from "../Webpack";
 
 test("#patchEntries, simple entry should be patched", (t) => {
   const entry = "a.js";

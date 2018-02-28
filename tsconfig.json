@@ -4,23 +4,8 @@
       "src/**"
     ],
     "outDir": "lib",
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "experimentalDecorators": true,
-    "declaration": true,
-    "moduleResolution": "node",
-    "jsx": "react",
     "module": "commonjs",
-    "target": "es5",
-    "pretty": true,
-    "sourceMap": false
-  },
-  "exclude": [
-    "lib/*",
-    "node_modules/*"
-  ],
-  "compileOnSave": true
+    "skipLibCheck": true,
+    "strict": true
+  }
 }

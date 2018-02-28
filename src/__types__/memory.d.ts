@@ -4,7 +4,9 @@ declare module "memory-fs" {
     new (data?: any): MemoryFileSystem;
     meta(pathString: string): any;
     existsSync(pathString: string): boolean;
-    statSync(pathString: string): {
+    statSync(
+      pathString: string,
+    ): {
       isFile: () => boolean;
       isDirectory: () => boolean;
       isBlockDevice: () => boolean;
@@ -22,10 +24,13 @@ declare module "memory-fs" {
     unlinkSync(pathString: string): void;
     readlinkSync(pathString: string): void;
     writeFileSync(pathString: string, content: string | Buffer, encoding?: string): void;
-    createReadStream(path: string, options: {
-      start: number;
-      end: number;
-    }): any;
+    createReadStream(
+      path: string,
+      options: {
+        start: number;
+        end: number;
+      },
+    ): any;
     createWriteStream(path: string, options: any): any;
     exists(path: string, callback: (isExist: boolean) => any): any;
     writeFile(path: string, content: string | Buffer, callback: (err?: Error) => any): any;
@@ -43,7 +48,6 @@ declare module "memory-fs" {
     readFile(path: string, optArg: {}, callback: (err?: Error, result?: any) => any): void;
   }
 
-  const mfs: MemoryFileSystem
+  const mfs: MemoryFileSystem;
   export = mfs;
 }
-
