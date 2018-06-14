@@ -1,6 +1,6 @@
 {
   "name": "webpack-browser-sync",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "main": "lib/index.js",
   "description": "A webpack dev server with browser-sync",
   "bin": {
@@ -12,31 +12,50 @@
     "bin/"
   ],
   "engines": {
-    "node": ">= 8"
+    "node": ">= 10"
   },
   "scripts": {
     "build": "npx tsc -p .",
     "webpack": "npx ts-node ./src/command.ts --config ./src/__examples__/webpack.config.ts --index=../index.html",
-    "test": "npx prettier **/**/*.ts --write && npm run build && ava -v",
+    "test": "npx prettier **/**/*.ts --write && jest",
     "prepublish": "npm run build"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "moduleFileExtensions": [
+      "tsx",
+      "ts",
+      "json",
+      "jsx",
+      "js"
+    ],
+    "modulePaths": [
+      "<rootDir>"
+    ],
+    "testRegex": ".*/__tests__/.+\\.(generator|test|spec)\\.(ts|tsx)$"
   },
   "dependencies": {
     "@types/browser-sync": "0.0.x",
     "@types/compression": "0.0.x",
-    "@types/connect": "3.4.31",
+    "@types/connect": "3.4.32",
+    "@types/jest": "23.1.0",
     "@types/lodash": "4.14.x",
     "@types/loglevel": "1.5.3",
-    "@types/node": "9.4.x",
-    "@types/webpack": "3.8.x",
+    "@types/node": "10.3.x",
+    "@types/webpack": "4.4.x",
     "@types/yargs": "11.0.x",
-    "browser-sync": "2.23.x",
+    "browser-sync": "2.24.x",
     "compression": "1.7.x",
     "connect-history-api-fallback": "1.5.x",
     "interpret": "1.1.x",
+    "jest": "23.1.0",
     "lodash": "4.17.x",
     "memory-fs": "0.4.x",
-    "webpack-dev-middleware": "2.0.x",
-    "webpack-hot-middleware": "2.21.x",
+    "ts-jest": "22.4.6",
+    "webpack-dev-middleware": "3.1.x",
+    "webpack-hot-middleware": "2.22.x",
     "yargs": "11.0.x"
   },
   "peerDependencies": {
@@ -44,15 +63,14 @@
   },
   "devDependencies": {
     "@types/faker": "4.1.2",
-    "@types/html-webpack-plugin": "2.30.2",
-    "ava": "0.25.x",
+    "@types/html-webpack-plugin": "2.30.3",
     "faker": "4.1.x",
-    "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
-    "ts-loader": "4.0.x",
-    "ts-node": "5.0.x",
-    "prettier": "1.11.x",
-    "typescript": "2.7.x",
-    "webpack": "4.0.1"
+    "html-webpack-plugin": "3.2.0",
+    "prettier": "1.13.x",
+    "ts-loader": "4.4.x",
+    "ts-node": "6.1.x",
+    "typescript": "2.9.x",
+    "webpack": "4.12.0"
   },
   "repository": "git@github.com:morlay/webpack-browser-sync.git",
   "author": "Morlay <morlay@qq.com>",

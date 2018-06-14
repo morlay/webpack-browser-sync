@@ -1,71 +1,78 @@
-import * as browserSync from "browser-sync"
-import * as _ from "lodash"
-import * as MemoryFS from "memory-fs"
-import * as path from "path"
-import * as webpack from "webpack"
-import * as webpackDevMiddleware from "webpack-dev-middleware"
-import * as webpackHotMiddleware from "webpack-hot-middleware"
+import * as browserSync from "browser-sync";
+import {
+  concat,
+  dropWhile,
+  isObject,
+  map,
+  mapValues,
+  reduce
+} from "lodash";
+import * as MemoryFS from "memory-fs";
+import * as path from "path";
+import * as webpack from "webpack";
+import * as webpackDevMiddleware from "webpack-dev-middleware";
+import * as webpackHotMiddleware from "webpack-hot-middleware";
 
-export const HMR_ENTRY = "webpack-hot-middleware/client"
+export const HMR_ENTRY = "webpack-hot-middleware/client";
 
 export interface IPlugin extends webpack.Plugin {
-  new (): IPlugin;
+  new(): IPlugin;
 }
 
 export const getHmrPluginsByVersion = (): IPlugin[] => {
-  const version = require("webpack/package.json").version
-  const majarVersion = String(version).split(".")[0]
+  const version = require("webpack/package.json").version;
+  const majarVersion = String(version).split(".")[0];
 
   switch (majarVersion) {
     case "1":
-      throw new Error("not support webpack@1")
+      throw new Error("not support webpack@1");
     case "2":
     default:
       return [
-        webpack.HotModuleReplacementPlugin,
-      ] as IPlugin[]
+        webpack.HotModuleReplacementPlugin
+      ] as IPlugin[];
   }
-}
+};
 
-const concatHMREntry = (entry: string): string[] => [HMR_ENTRY].concat(entry)
+const concatHMREntry = (entry: string): string[] => [HMR_ENTRY].concat(entry);
 
 const isOneOfPlugins = (PluginList: IPlugin[], plugin: webpack.Plugin) =>
-  _.reduce(PluginList, (result, Plugin) => (result || (plugin instanceof Plugin)), false)
+  reduce(PluginList, (result, Plugin) => (result || (plugin instanceof Plugin)), false);
 
 export const patchEntryWithHMR = (entry: string | { [k: string]: string }): string[] | { [k: string]: string[] } => {
-  if (_.isObject(entry)) {
-    return _.mapValues(entry as { [k: string]: string }, concatHMREntry)
+  if (isObject(entry)) {
+    return mapValues(entry as { [k: string]: string }, concatHMREntry);
   }
-  return concatHMREntry(entry as string)
-}
+  return concatHMREntry(entry as string);
+};
 
 export const patchPlugins = (plugins: IPlugin[]) => {
-  const hmrPlugins = getHmrPluginsByVersion()
-  const cleanedPlugins = _.dropWhile(plugins, (plugin) => isOneOfPlugins(hmrPlugins, plugin))
-  return _.concat(cleanedPlugins, _.map(hmrPlugins, (Plugin: IPlugin) => new Plugin()))
-}
+  const hmrPlugins = getHmrPluginsByVersion();
+  const cleanedPlugins = dropWhile(plugins, (plugin) => isOneOfPlugins(hmrPlugins, plugin));
+  return concat(cleanedPlugins, map(hmrPlugins, (Plugin: IPlugin) => new Plugin()));
+};
 
 export const patchWebConfigWithHMR = (webpackConfig: webpack.Configuration): webpack.Configuration => ({
   ...webpackConfig,
   entry: patchEntryWithHMR(webpackConfig.entry as string),
-  plugins: patchPlugins(webpackConfig.plugins as IPlugin[]),
-})
+  plugins: patchPlugins(webpackConfig.plugins as IPlugin[])
+});
 
 export const createMiddlewaresForWebpack = (
   webpackConfig: webpack.Configuration,
   index: string,
-  hot: boolean = false,
+  hot: boolean = false
 ) => {
 
   const patchedWebpackConfig = hot
     ? patchWebConfigWithHMR(webpackConfig)
-    : webpackConfig
+    : webpackConfig;
 
-  const bundler = webpack(patchedWebpackConfig)
+  const bundler = webpack(patchedWebpackConfig);
 
-  const fs = new MemoryFS()
+  const fs = new MemoryFS();
 
-  bundler.outputFileSystem = fs
+  bundler.outputFileSystem = fs;
 
   const devMiddleware = webpackDevMiddleware(bundler, {
     publicPath: (patchedWebpackConfig.output || {}).publicPath!,
@@ -78,30 +85,30 @@ export const createMiddlewaresForWebpack = (
       timings: true,
       chunks: false,
       chunkModules: false,
-      cached: false,
-    },
-  })
+      cached: false
+    }
+  });
 
   const devServerMiddlewares = [
     devMiddleware,
     ((req, res, next) => {
       if (req.method === "GET" && req.url === "/") {
         devMiddleware.waitUntilValid(() => {
-          const indexFile = path.join(webpackConfig.output!.path!, index)
-          res.end(fs.readFileSync(indexFile))
-        })
+          const indexFile = path.join(webpackConfig.output!.path!, index);
+          res.end(fs.readFileSync(indexFile));
+        });
       } else {
-        next()
+        next();
       }
-    }) as browserSync.MiddlewareHandler,
-  ]
+    }) as browserSync.MiddlewareHandler
+  ];
 
   if (hot) {
     return [
       ...devServerMiddlewares,
-      webpackHotMiddleware(bundler),
-    ]
+      webpackHotMiddleware(bundler)
+    ];
   }
 
-  return devServerMiddlewares
-}
+  return devServerMiddlewares;
+};

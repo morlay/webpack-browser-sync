@@ -1,13 +1,13 @@
-import * as browserSync from "browser-sync"
-import * as compress from "compression"
-import * as connectHistoryApiFallback from "connect-history-api-fallback"
-import * as interpret from "interpret"
-import * as _ from "lodash"
-import * as path from "path"
+import * as browserSync from "browser-sync";
+import * as compress from "compression";
+import * as connectHistoryApiFallback from "connect-history-api-fallback";
+import * as interpret from "interpret";
+import { get } from "lodash";
+import * as path from "path";
 
-import { getBaseDir } from "./utils"
+import { getBaseDir } from "./utils";
 
-import { createMiddlewaresForWebpack } from "./Webpack"
+import { createMiddlewaresForWebpack } from "./Webpack";
 
 export interface IOptions {
   config: string;
@@ -29,15 +29,15 @@ type TModuleDescriptor = null | string | string[] | IInterpret
 function registerCompiler(moduleDescriptor: TModuleDescriptor) {
   if (moduleDescriptor) {
     if (typeof moduleDescriptor === "string") {
-      require(moduleDescriptor)
+      require(moduleDescriptor);
     } else if (!Array.isArray(moduleDescriptor)) {
-      moduleDescriptor.register(require(moduleDescriptor.module))
+      moduleDescriptor.register(require(moduleDescriptor.module));
     } else {
       for (const moduleName of moduleDescriptor) {
         if (moduleName) {
           try {
-            registerCompiler(moduleName)
-            break
+            registerCompiler(moduleName);
+            break;
           } catch (e) {
             // do nothing
           }
@@ -48,46 +48,46 @@ function registerCompiler(moduleDescriptor: TModuleDescriptor) {
 }
 
 const createBrowserSyncOptions = (options: IOptions): browserSync.Options => {
-  const webpackConfigFile = path.join(process.cwd(), options.config)
-  const webpackConfigFileExt = path.extname(webpackConfigFile)
-  registerCompiler(interpret.extensions[webpackConfigFileExt])
-  const webpackConfig = require(webpackConfigFile)
+  const webpackConfigFile = path.join(process.cwd(), options.config);
+  const webpackConfigFileExt = path.extname(webpackConfigFile);
+  registerCompiler(interpret.extensions[webpackConfigFileExt]);
+  const webpackConfig = require(webpackConfigFile);
 
-  let middlewares: browserSync.MiddlewareHandler[] = []
+  let middlewares: browserSync.MiddlewareHandler[] = [];
 
   if (options.historyApiFallback) {
     middlewares = middlewares.concat(connectHistoryApiFallback({
-      index: "/",
-    }))
+      index: "/"
+    }));
   }
 
   if (options.webpack) {
-    middlewares = middlewares.concat(createMiddlewaresForWebpack(webpackConfig, options.index, options.hot))
+    middlewares = middlewares.concat(createMiddlewaresForWebpack(webpackConfig, options.index, options.hot) as any);
   }
 
   if (options.compress) {
-    middlewares = middlewares.concat(compress({ level: 6 }) as browserSync.MiddlewareHandler)
+    middlewares = middlewares.concat(compress({ level: 6 }) as browserSync.MiddlewareHandler);
   }
 
   if (options.proxy) {
     return {
-      ...(_.get(webpackConfig, "devServer.browserSync")),
+      ...(get(webpackConfig, "devServer.browserSync")),
       proxy: {
         target: options.proxy as string,
-        middleware: middlewares as browserSync.MiddlewareHandler[],
-      } as any,
-    }
+        middleware: middlewares as browserSync.MiddlewareHandler[]
+      } as any
+    };
   }
 
   return {
-    ...(_.get(webpackConfig, "devServer.browserSync")),
+    ...(get(webpackConfig, "devServer.browserSync")),
     server: {
       baseDir: getBaseDir(webpackConfig.output.path, webpackConfig.output.publicPath),
       index: path.join(webpackConfig.output.publicPath || "/", options.index),
-      middleware: middlewares as browserSync.MiddlewareHandler[],
+      middleware: middlewares as browserSync.MiddlewareHandler[]
     },
-    notify: false,
-  }
-}
+    notify: false
+  };
+};
 
-export const create = (opts: IOptions) => browserSync(createBrowserSyncOptions(opts))
+export const create = (opts: IOptions) => browserSync(createBrowserSyncOptions(opts));
