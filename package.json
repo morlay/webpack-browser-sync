@@ -18,7 +18,7 @@
     "build": "npx tsc -p .",
     "webpack": "npx ts-node ./src/command.ts --config ./src/__examples__/webpack.config.ts --index=../index.html",
     "test": "npx prettier **/**/*.ts --write && jest",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "jest": {
     "transform": {
