@@ -1,11 +1,47 @@
 {
   "compilerOptions": {
-    "rootDirs": [
-      "src/**"
-    ],
-    "outDir": "lib",
+    "paths": {
+      "*": [
+        "*",
+        "__types__/*"
+      ]
+    },
+    /* Basic Options */
+    "target": "es2015",
     "module": "commonjs",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "outDir": "./lib",
+    "rootDir": "./src",
+    "removeComments": true,
+    "importHelpers": true,
+    "pretty": true,
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "strictFunctionTypes": false,
+    /* Additional Checks */
+    "noUnusedLocals": true,
+    "preserveConstEnums": false,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    /* Module Resolution Options */
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    /* Source Map Options */
+    "sourceMap": false,
+    /* Experimental Options */
+    "experimentalDecorators": true,
     "skipLibCheck": true,
-    "strict": true
-  }
+    "allowJs": false,
+    "declaration": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }

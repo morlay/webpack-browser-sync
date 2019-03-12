@@ -1,4 +1,4 @@
-import { HMR_ENTRY, patchEntryWithHMR } from "../Webpack";
+import { HMR_ENTRY, patchEntryWithHMR } from "../WebpackOptions";
 
 test("#patchEntries, simple entry should be patched", () => {
   const entry = "a.js";

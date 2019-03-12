@@ -1,4 +1,4 @@
-import * as path from "path";
+import path from "path";
 
 export const getBaseDir = (pathString: string, publicPath?: string): string => {
   if (!publicPath || publicPath === "/") {

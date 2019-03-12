@@ -1,4 +1,4 @@
-import * as yargs from "yargs";
+import yargs from "yargs";
 
 import {
   create,
@@ -8,7 +8,7 @@ const argv = yargs(process.argv.slice(2))
 
   .usage("Usage: $0 [options]")
 
-  .example("webpack-browser-sync")
+  .example("webpack-browser-sync", "")
 
   .options({
     config: {
@@ -49,4 +49,4 @@ const argv = yargs(process.argv.slice(2))
   .showHelpOnFail(false, "whoops, something went wrong! run with --help")
   .argv;
 
-create(argv);
+create(argv as any);

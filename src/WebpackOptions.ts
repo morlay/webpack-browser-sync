@@ -1,4 +1,4 @@
-import * as browserSync from "browser-sync";
+import browserSync from "browser-sync";
 import {
   concat,
   dropWhile,
@@ -7,11 +7,11 @@ import {
   mapValues,
   reduce
 } from "lodash";
-import * as MemoryFS from "memory-fs";
-import * as path from "path";
-import * as webpack from "webpack";
-import * as webpackDevMiddleware from "webpack-dev-middleware";
-import * as webpackHotMiddleware from "webpack-hot-middleware";
+import MemoryFS from "memory-fs";
+import path from "path";
+import webpack from "webpack";
+import webpackDevMiddleware from "webpack-dev-middleware";
+import webpackHotMiddleware from "webpack-hot-middleware";
 
 export const HMR_ENTRY = "webpack-hot-middleware/client";
 

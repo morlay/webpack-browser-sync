@@ -1,13 +1,11 @@
-import * as browserSync from "browser-sync";
-import * as compress from "compression";
-import * as connectHistoryApiFallback from "connect-history-api-fallback";
-import * as interpret from "interpret";
+import browserSync from "browser-sync";
+import compress from "compression";
+import connectHistoryApiFallback from "connect-history-api-fallback";
+import interpret from "interpret";
 import { get } from "lodash";
-import * as path from "path";
-
+import path from "path";
 import { getBaseDir } from "./utils";
-
-import { createMiddlewaresForWebpack } from "./Webpack";
+import { createMiddlewaresForWebpack } from "./WebpackOptions";
 
 export interface IOptions {
   config: string;
@@ -50,7 +48,9 @@ function registerCompiler(moduleDescriptor: TModuleDescriptor) {
 const createBrowserSyncOptions = (options: IOptions): browserSync.Options => {
   const webpackConfigFile = path.join(process.cwd(), options.config);
   const webpackConfigFileExt = path.extname(webpackConfigFile);
-  registerCompiler(interpret.extensions[webpackConfigFileExt]);
+
+  registerCompiler(interpret.extensions[webpackConfigFileExt] as any);
+
   const webpackConfig = require(webpackConfigFile);
 
   let middlewares: browserSync.MiddlewareHandler[] = [];
@@ -58,7 +58,7 @@ const createBrowserSyncOptions = (options: IOptions): browserSync.Options => {
   if (options.historyApiFallback) {
     middlewares = middlewares.concat(connectHistoryApiFallback({
       index: "/"
-    }));
+    }) as any);
   }
 
   if (options.webpack) {
@@ -81,10 +81,13 @@ const createBrowserSyncOptions = (options: IOptions): browserSync.Options => {
 
   return {
     ...(get(webpackConfig, "devServer.browserSync")),
+    ...(process.env.PORT ? ({
+      port: Number(process.env.PORT)
+    }) : {}),
     server: {
       baseDir: getBaseDir(webpackConfig.output.path, webpackConfig.output.publicPath),
       index: path.join(webpackConfig.output.publicPath || "/", options.index),
-      middleware: middlewares as browserSync.MiddlewareHandler[]
+      middleware: middlewares as browserSync.MiddlewareHandler[],
     },
     notify: false
   };

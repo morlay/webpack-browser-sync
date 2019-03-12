@@ -1,5 +1,5 @@
-import * as HtmlWebpackPlugin from "html-webpack-plugin";
-import * as path from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import path from "path";
 import { Configuration } from "webpack";
 
 const conf: Configuration = {
