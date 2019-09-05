@@ -64,7 +64,7 @@ declare module "memory-fs" {
 
     readdir(path: string, callback: (err?: Error, result?: any) => any): void;
 
-    mkdirp(path: string, callback: (err?: Error, result?: any) => any): void;
+    mkdirp(path: string, callback: (err?: Error) => any): void;
 
     rmdir(path: string, callback: (err?: Error, result?: any) => any): void;
 
