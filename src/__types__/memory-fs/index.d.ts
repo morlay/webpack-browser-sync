@@ -72,7 +72,7 @@ declare module "memory-fs" {
 
     readlink(path: string, callback: (err?: Error, result?: any) => any): void;
 
-    mkdir(path: string, optArg: {}, callback: (err?: Error, result?: any) => any): void;
+    mkdir(path: string, callback: (err?: Error) => any): void;
 
     readFile(path: string, optArg: {}, callback: (err?: Error, result?: any) => any): void;
   }
