@@ -1,15 +1,9 @@
 import browserSync from "browser-sync";
-import {
-  concat,
-  dropWhile,
-  isObject,
-  map,
-  mapValues,
-  reduce
-} from "lodash";
+import { concat, dropWhile, isObject, map, mapValues, reduce } from "lodash";
 import MemoryFS from "memory-fs";
 import path from "path";
 import webpack from "webpack";
+import mime from "mime";
 import webpackDevMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
 
@@ -98,7 +92,14 @@ export const createMiddlewaresForWebpack = (
           res.end(fs.readFileSync(indexFile));
         });
       } else {
-        next();
+        try {
+          // fallback to try finding relative path link "../sw.js"
+          const contentType = mime.getType(req.url!);
+          contentType && res.setHeader("content-type", contentType);
+          res.end(fs.readFileSync(webpackConfig.output!.path + ".." + req.url!));
+        } catch (e) {
+          next();
+        }
       }
     }) as browserSync.MiddlewareHandler
   ];
