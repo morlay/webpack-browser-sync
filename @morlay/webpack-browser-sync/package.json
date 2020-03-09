@@ -18,14 +18,14 @@
     "connect-history-api-fallback": "1.6.x",
     "interpret": "2.0.x",
     "lodash": "4.x",
+    "mime": "2.4.4",
     "webpack-dev-middleware": "3.7.x",
     "webpack-hot-middleware": "2.25.x",
-    "yargs": "15.x",
-    "mime": "2.4.4"
+    "yargs": "15.x"
   },
   "peerDependencies": {
-    "webpack": "4.x",
-    "@babel/runtime-corejs3": "*"
+    "@babel/runtime-corejs3": "*",
+    "webpack": "4.x"
   },
   "files": [
     "dist/"
