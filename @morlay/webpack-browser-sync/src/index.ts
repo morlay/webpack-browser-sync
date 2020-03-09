@@ -18,17 +18,18 @@ export interface IOptions {
 }
 
 interface IInterpret {
-  module: string
-  register: (module: any) => void
+  module: string;
+  register: (module: any) => void;
 }
 
-type TModuleDescriptor = null | string | string[] | IInterpret
+type TModuleDescriptor = null | string | string[] | IInterpret;
 
 function registerCompiler(moduleDescriptor: TModuleDescriptor) {
   if (moduleDescriptor) {
     if (typeof moduleDescriptor === "string") {
       require(moduleDescriptor);
     } else if (!Array.isArray(moduleDescriptor)) {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       moduleDescriptor.register(require(moduleDescriptor.module));
     } else {
       for (const moduleName of moduleDescriptor) {
@@ -51,14 +52,17 @@ const createBrowserSyncOptions = (options: IOptions): browserSync.Options => {
 
   registerCompiler(interpret.extensions[webpackConfigFileExt] as any);
 
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const webpackConfig = require(webpackConfigFile);
 
   let middlewares: browserSync.MiddlewareHandler[] = [];
 
   if (options.historyApiFallback) {
-    middlewares = middlewares.concat(connectHistoryApiFallback({
-      index: "/"
-    }) as any);
+    middlewares = middlewares.concat(
+      connectHistoryApiFallback({
+        index: "/",
+      }) as any,
+    );
   }
 
   if (options.webpack) {
@@ -71,26 +75,30 @@ const createBrowserSyncOptions = (options: IOptions): browserSync.Options => {
 
   if (options.proxy) {
     return {
-      ...(get(webpackConfig, "devServer.browserSync")),
+      ...get(webpackConfig, "devServer.browserSync"),
       proxy: {
-        target: options.proxy as string,
-        middleware: middlewares as browserSync.MiddlewareHandler[]
-      } as any
+        target: options.proxy,
+        middleware: middlewares,
+      } as any,
     };
   }
 
   return {
-    ...(get(webpackConfig, "devServer.browserSync")),
-    ...(process.env.PORT ? ({
-      port: Number(process.env.PORT)
-    }) : {}),
+    ...get(webpackConfig, "devServer.browserSync"),
+    ...(process.env.PORT
+      ? {
+          port: Number(process.env.PORT),
+        }
+      : {}),
     server: {
       baseDir: getBaseDir(webpackConfig.output.path, webpackConfig.output.publicPath),
       index: path.join(webpackConfig.output.publicPath || "/", options.index),
-      middleware: middlewares as browserSync.MiddlewareHandler[],
+      middleware: middlewares,
     },
-    notify: false
+    notify: false,
   };
 };
 
-export const create = (opts: IOptions) => browserSync(createBrowserSyncOptions(opts));
+export const create = (opts: IOptions) => {
+  return browserSync(createBrowserSyncOptions(opts));
+};

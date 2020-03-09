@@ -5,7 +5,8 @@ export const getBaseDir = (pathString: string, publicPath?: string): string => {
     return pathString;
   }
 
-  const relativePath = path.resolve(publicPath)
+  const relativePath = path
+    .resolve(publicPath)
     .split("/")
     .filter((item: string) => item.length)
     .map(() => "..")

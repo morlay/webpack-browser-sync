@@ -1,28 +1,30 @@
 {
   "name": "webpack-browser-sync",
-  "version": "0.12.2",
-  "main": "lib/index.js",
-  "description": "A webpack dev server with browser-sync",
-  "bin": {
-    "webpack-browser-sync": "bin/webpack-browser-sync.js"
-  },
-  "files": [
-    "src/",
-    "lib/",
-    "bin/"
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "@morlay/*"
   ],
-  "engines": {
-    "node": ">= 10"
+  "dependencies": {
+    "@querycap-dev/dev-deps": "*",
+    "@querycap-dev/monobundle": "*",
+    "html-webpack-plugin": "3.2.0",
+    "tslib": "1.11.1",
+    "webpack": "4.x"
   },
   "scripts": {
-    "build": "tsc -p .",
-    "start": "npm run build && node ./bin/webpack-browser-sync.js --config ./src/__examples__/webpack.config.ts --index=../index.html",
-    "test": "npx prettier **/**/*.ts --write && jest",
-    "prepare": "npm run build"
+    "start": "yarn build && yarn demo",
+    "demo": "webpack-browser-sync --config ./__examples__/webpack.config.ts --historyApiFallback --index=../index.html",
+    "clean": "rm -rf @morlay*/*/node_modules",
+    "fmt": "prettier --write @morlay*/{,**/}{,**/}*.{ts,tsx,json,md}",
+    "test": "jest --coverage",
+    "build": "lerna exec monobundle",
+    "prepare": "yarn test && yarn build"
   },
   "jest": {
+    "testEnvironment": "node",
     "transform": {
-      "^.+\\.tsx?$": "ts-jest"
+      "^.+\\.[t|j]sx?$": "babel-jest"
     },
     "moduleFileExtensions": [
       "tsx",
@@ -36,47 +38,40 @@
     ],
     "testRegex": ".*/__tests__/.+\\.(generator|test|spec)\\.(ts|tsx)$"
   },
-  "dependencies": {
-    "@types/browser-sync": "2.26.x",
-    "@types/compression": "1.0.x",
-    "@types/connect": "3.4.32",
-    "@types/connect-history-api-fallback": "1.3.3",
-    "@types/interpret": "1.1.1",
-    "@types/jest": "24.0.19",
-    "@types/lodash": "4.14.x",
-    "@types/loglevel": "1.6.3",
-    "@types/node": "12.11.x",
-    "@types/webpack": "4.39.x",
-    "@types/webpack-dev-middleware": "2.0.3",
-    "@types/webpack-hot-middleware": "2.16.5",
-    "@types/yargs": "13.0.x",
-    "browser-sync": "2.26.x",
-    "compression": "1.7.x",
-    "connect-history-api-fallback": "1.6.x",
-    "interpret": "2.0.x",
-    "jest": "24.9.0",
-    "lodash": "4.17.x",
-    "memory-fs": "0.4.x",
-    "ts-jest": "24.1.0",
-    "webpack-dev-middleware": "3.7.x",
-    "webpack-hot-middleware": "2.25.x",
-    "yargs": "14.2.x"
+  "husky": {
+    "hooks": {
+      "post-merge": "yarn",
+      "pre-commit": "lint-staged && pretty-quick --staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
-  "peerDependencies": {
-    "webpack": "4"
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
-  "devDependencies": {
-    "@types/faker": "4.1.6",
-    "@types/html-webpack-plugin": "3.2.1",
-    "faker": "4.1.x",
-    "html-webpack-plugin": "3.2.0",
-    "prettier": "1.18.x",
-    "ts-loader": "6.2.x",
-    "ts-node": "8.4.x",
-    "typescript": "3.6.x",
-    "webpack": "4.39.x"
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --quiet"
+    ]
   },
-  "repository": "git@github.com:morlay/webpack-browser-sync.git",
-  "author": "Morlay <morlay@qq.com>",
-  "license": "WTFPL"
+  "prettier": {
+    "trailingComma": "all",
+    "arrowParens": "always",
+    "printWidth": 120,
+    "jsxBracketSameLine": true
+  },
+  "eslintConfig": {
+    "extends": [
+      "@querycap-dev/eslint-config"
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "@typescript-eslint/ban-ts-ignore": "off"
+    }
+  }
 }

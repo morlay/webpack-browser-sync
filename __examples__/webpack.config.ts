@@ -1,3 +1,4 @@
+//@ts-ignore
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import path from "path";
 import { Configuration } from "webpack";
@@ -12,24 +13,6 @@ const conf: Configuration = {
     publicPath: "/__built__/",
     filename: "[name].js",
   },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: [
-          {
-            loader: "ts-loader",
-            options: {
-              transpileOnly: true,
-              compilerOptions: {
-                declaration: false,
-              },
-            },
-          },
-        ],
-      },
-    ],
-  },
   plugins: [
     new HtmlWebpackPlugin({
       filename: "../index.html",
@@ -42,4 +25,4 @@ const conf: Configuration = {
   // },
 };
 
-export = conf;
+module.exports = conf;
